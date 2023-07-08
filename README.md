@@ -1,1 +1,2 @@
-# sistema-gerenciamento-produtos
+# Sistema Gerenciamento Produtos, Categorias e Usuários
+
