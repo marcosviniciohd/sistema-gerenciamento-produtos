@@ -3,7 +3,8 @@ package br.edu.iftm.crud.prod.cat.user.services;
 import br.edu.iftm.crud.prod.cat.user.dto.CategoryDTO;
 import br.edu.iftm.crud.prod.cat.user.entities.Category;
 import br.edu.iftm.crud.prod.cat.user.repositories.CategoryRepository;
-import br.edu.iftm.crud.prod.cat.user.services.exceptions.EntityNotFoundException;
+import br.edu.iftm.crud.prod.cat.user.services.exceptions.ResourceNotFoundException;
+import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,7 +27,7 @@ public class CategoryService {
     @Transactional(readOnly = true)
     public CategoryDTO findById(Long id) {
         Optional<Category> obj = repository.findById(id);
-        Category entity = obj.orElseThrow(() -> new EntityNotFoundException("Entidade não encontrada"));
+        Category entity = obj.orElseThrow(() -> new ResourceNotFoundException("Entidade não encontrada"));
         return new CategoryDTO(entity);
     }
 
@@ -36,5 +37,18 @@ public class CategoryService {
         entity.setName(dto.getName());
         entity = repository.save(entity);
         return new CategoryDTO(entity);
+    }
+
+    @Transactional
+    public CategoryDTO update(Long id, CategoryDTO dto) {
+        try {
+            Category entity = repository.getOne(id);
+            entity.setName(dto.getName());
+            entity = repository.save(entity);
+            return new CategoryDTO(entity);
+        } catch (EntityNotFoundException e) {
+            throw new ResourceNotFoundException("Id não encontrado " + id);
+        }
+
     }
 }
