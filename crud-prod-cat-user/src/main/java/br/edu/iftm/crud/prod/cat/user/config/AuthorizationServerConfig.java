@@ -1,6 +1,7 @@
 package br.edu.iftm.crud.prod.cat.user.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,6 +16,15 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
+    @Value("${security.oauth2.client.client-id}")
+    private String clientId;
+
+    @Value("${security.oauth2.client.client-secret}")
+    private String clientSecret;
+
+    @Value("${jwt.duration}")
+    private Integer jwtDuration;
+
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
@@ -37,11 +47,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         clients.inMemory()
-                .withClient("my-angular-app") // identificador do cliente
-                .secret(passwordEncoder.encode("secret")) // senha
+                .withClient(clientId) // identificador do cliente
+                .secret(passwordEncoder.encode(clientSecret)) // senha
                 .scopes("read", "write") // escopos de acesso
                 .authorizedGrantTypes("password") // tipo de concessão de acesso
-                .accessTokenValiditySeconds(86400); // tempo de validade do token
+                .accessTokenValiditySeconds(jwtDuration); // tempo de validade do token
 
     }
 
