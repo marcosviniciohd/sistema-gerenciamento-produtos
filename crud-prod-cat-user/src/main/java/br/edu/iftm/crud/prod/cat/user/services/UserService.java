@@ -3,6 +3,7 @@ package br.edu.iftm.crud.prod.cat.user.services;
 import br.edu.iftm.crud.prod.cat.user.dto.RoleDTO;
 import br.edu.iftm.crud.prod.cat.user.dto.UserDTO;
 import br.edu.iftm.crud.prod.cat.user.dto.UserInsertDTO;
+import br.edu.iftm.crud.prod.cat.user.dto.UserUpdateDTO;
 import br.edu.iftm.crud.prod.cat.user.entities.Role;
 import br.edu.iftm.crud.prod.cat.user.entities.User;
 import br.edu.iftm.crud.prod.cat.user.repositories.RoleRepository;
@@ -54,7 +55,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserDTO update(Long id, UserDTO dto) {
+    public UserDTO update(Long id, UserUpdateDTO dto) {
         try {
             User entity = repository.getOne(id);
             copyDtoToEntity(dto, entity);

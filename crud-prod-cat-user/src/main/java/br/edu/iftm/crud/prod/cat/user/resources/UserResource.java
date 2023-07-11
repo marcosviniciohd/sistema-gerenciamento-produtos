@@ -2,6 +2,7 @@ package br.edu.iftm.crud.prod.cat.user.resources;
 
 import br.edu.iftm.crud.prod.cat.user.dto.UserDTO;
 import br.edu.iftm.crud.prod.cat.user.dto.UserInsertDTO;
+import br.edu.iftm.crud.prod.cat.user.dto.UserUpdateDTO;
 import br.edu.iftm.crud.prod.cat.user.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -41,9 +42,9 @@ public class UserResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> update(@Valid @PathVariable Long id, @RequestBody UserDTO dto) {
-        dto = service.update(id, dto);
-        return ResponseEntity.ok().body(dto);
+    public ResponseEntity<UserDTO> update(@Valid @PathVariable Long id, @RequestBody @Valid UserUpdateDTO dto) {
+        UserDTO newDto = service.update(id, dto);
+        return ResponseEntity.ok().body(newDto);
     }
 
     @DeleteMapping(value = "/{id}")

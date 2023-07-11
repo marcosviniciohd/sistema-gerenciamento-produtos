@@ -1,4 +1,4 @@
-package br.edu.iftm.crud.prod.cat.user.services.exceptions.validation;
+package br.edu.iftm.crud.prod.cat.user.services.validation;
 
 import br.edu.iftm.crud.prod.cat.user.dto.UserInsertDTO;
 import br.edu.iftm.crud.prod.cat.user.entities.User;
