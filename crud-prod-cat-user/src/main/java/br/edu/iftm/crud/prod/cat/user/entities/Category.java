@@ -1,7 +1,7 @@
 package br.edu.iftm.crud.prod.cat.user.entities;
 
-import jakarta.persistence.*;
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Objects;
@@ -11,7 +11,7 @@ import java.util.Set;
 @Table(name = "tb_category")
 public class Category implements Serializable {
     @Id
-    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     @ManyToMany(mappedBy = "categories")

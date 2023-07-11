@@ -10,7 +10,6 @@ import br.edu.iftm.crud.prod.cat.user.repositories.CategoryRepository;
 import br.edu.iftm.crud.prod.cat.user.repositories.ProductRepository;
 import br.edu.iftm.crud.prod.cat.user.services.exceptions.DatabaseException;
 import br.edu.iftm.crud.prod.cat.user.services.exceptions.ResourceNotFoundException;
-import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,6 +17,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.persistence.EntityNotFoundException;
 
 
 @Service
