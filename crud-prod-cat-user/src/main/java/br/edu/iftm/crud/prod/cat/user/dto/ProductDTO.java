@@ -9,14 +9,23 @@ import java.util.Set;
 import br.edu.iftm.crud.prod.cat.user.entities.Category;
 import br.edu.iftm.crud.prod.cat.user.entities.Product;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.PastOrPresent;
+import javax.validation.constraints.Positive;
+
 
 public class ProductDTO implements Serializable {
 
     private Long id;
+    @NotBlank(message = "Campo obrigatório")
     private String name;
+    @NotBlank(message = "Campo obrigatório")
     private String description;
+    @Positive(message = "Preço deve ser um valor positivo")
     private Double price;
     private String imgUrl;
+
+    @PastOrPresent(message = "A data do produto não pode ser futura")
     private Instant date;
 
     private List<CategoryDTO> categories = new ArrayList<>();
