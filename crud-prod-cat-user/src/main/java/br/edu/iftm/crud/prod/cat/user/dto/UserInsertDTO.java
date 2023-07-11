@@ -1,5 +1,8 @@
 package br.edu.iftm.crud.prod.cat.user.dto;
 
+import br.edu.iftm.crud.prod.cat.user.services.exceptions.validation.UserInsertValid;
+
+@UserInsertValid
 public class UserInsertDTO extends UserDTO {
     private String password;
 
